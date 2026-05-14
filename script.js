@@ -49,7 +49,7 @@ function renderExpenses(){
       <td>${expense.date}</td>
       <td>${expense.title}</td>
       <td>${expense.category}</td>
-      <td>${expense.amount.toLocaleString()} บาท</td>
+      <td>${expense.amount.toLocaleString()} ກີບ</td>
       <td>
         <button class="delete-btn" onclick="deleteExpense(${expense.id})">
           ลบ
@@ -61,8 +61,8 @@ function renderExpenses(){
 
   });
 
-  document.getElementById("monthlyTotal").innerText =
-    `ລວມລາຍຈ່າຍເດືອນນີ້: ${total.toLocaleString()} ກີບ`;
+    document.getElementById("monthlyTotal").innerText =
+        `ລວມເດືອນນີ້: ${total.toLocaleString()} ກີບ`;
 }
 
 function deleteExpense(id){
