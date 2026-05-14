@@ -14,30 +14,30 @@
 
   <div class="container">
 
-    <h1>💰 บันทึกรายจ่าย</h1>
+    <h1>💰 ແອັບບັນທຶກລາຍຈ່າຍ </h1>
 
     <div class="form-box">
 
       <input type="date" id="date">
 
-      <input type="text" id="title" placeholder="ชื่อรายการ">
+      <input type="text" id="title" placeholder="ຊື່ລາາຍການ">
 
       <select id="category">
-        <option value="อาหาร">อาหาร</option>
-        <option value="เดินทาง">เดินทาง</option>
-        <option value="ช้อปปิ้ง">ช้อปปิ้ง</option>
-        <option value="บิล">บิล</option>
+        <option value="อาหาร">ອາຫານ</option>
+        <option value="เดินทาง">ເຕີມເກມ</option>
+        <option value="ช้อปปิ้ง">ຊື້ເຄື່ອງ</option>
+        <option value="บิล">ເລກ</option>
         <option value="อื่นๆ">อื่นๆ</option>
       </select>
 
-      <input type="number" id="amount" placeholder="จำนวนเงิน">
+      <input type="number" id="amount" placeholder="ຈໍານວນເງິນ">
 
-      <button onclick="addExpense()">เพิ่มรายการ</button>
+      <button onclick="addExpense()">ເພີ່ມລາຍການ</button>
 
     </div>
 
     <div class="summary-box">
-      <h2 id="monthlyTotal">รวมเดือนนี้: 0 กีบ</h2>
+      <h2 id="monthlyTotal">ລວມເງິນເດືອນນີ້: 0 ກີບ</h2>
     </div>
 
     <div class="chart-box">
@@ -49,11 +49,11 @@
       <table>
         <thead>
           <tr>
-            <th>วันที่</th>
-            <th>รายการ</th>
-            <th>หมวดหมู่</th>
-            <th>จำนวนเงิน</th>
-            <th>ลบ</th>
+            <th>ວັນທີ</th>
+            <th>ລາຍການ</th>
+            <th>ໝວດໝູ່</th>
+            <th>ຈໍານວນເງິນ</th>
+            <th>ລົບ</th>
           </tr>
         </thead>
 
