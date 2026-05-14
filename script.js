@@ -1,3 +1,4 @@
+let chart;
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
 renderExpenses();
@@ -93,6 +94,48 @@ if ("serviceWorker" in navigator) {
       .then(() => {
         console.log("Service Worker Registered");
       });
+
+  });
+
+}
+function renderChart(){
+
+  const categories = {};
+  
+  expenses.forEach(expense => {
+
+    if(categories[expense.category]){
+      categories[expense.category] += expense.amount;
+    }else{
+      categories[expense.category] = expense.amount;
+    }
+
+  });
+
+  const labels = Object.keys(categories);
+  const data = Object.values(categories);
+
+  const ctx = document
+    .getElementById("expenseChart")
+    .getContext("2d");
+
+  if(chart){
+    chart.destroy();
+  }
+
+  chart = new Chart(ctx, {
+
+    type: "pie",
+
+    data: {
+
+      labels: labels,
+
+      datasets: [{
+        data: data
+      }]
+
+    }
 
   });
 
