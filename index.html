@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>💰 บันทึกรายจ่าย</h1>
+
+    <div class="form-box">
+
+      <input type="date" id="date">
+
+      <input type="text" id="title" placeholder="ชื่อรายการ">
+
+      <select id="category">
+        <option value="อาหาร">อาหาร</option>
+        <option value="เดินทาง">เดินทาง</option>
+        <option value="ช้อปปิ้ง">ช้อปปิ้ง</option>
+        <option value="บิล">บิล</option>
+        <option value="อื่นๆ">อื่นๆ</option>
+      </select>
+
+      <input type="number" id="amount" placeholder="จำนวนเงิน">
+
+      <button onclick="addExpense()">เพิ่มรายการ</button>
+
+    </div>
+
+    <div class="summary-box">
+      <h2 id="monthlyTotal">รวมเดือนนี้: 0 บาท</h2>
+    </div>
+
+    <div class="table-box">
+
+      <table>
+        <thead>
+          <tr>
+            <th>วันที่</th>
+            <th>รายการ</th>
+            <th>หมวดหมู่</th>
+            <th>จำนวนเงิน</th>
+            <th>ลบ</th>
+          </tr>
+        </thead>
+
+        <tbody id="expenseList">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
