@@ -10,7 +10,7 @@ function addExpense(){
   const amount = Number(document.getElementById("amount").value);
 
   if(!date || !title || !amount){
-    alert("กรุณากรอกข้อมูลให้ครบ");
+    alert("ກະລຸນາກອກຂໍມູນໃຫ້ຄົບ");
     return;
   }
 
@@ -62,7 +62,7 @@ function renderExpenses(){
   });
 
   document.getElementById("monthlyTotal").innerText =
-    `รวมเดือนนี้: ${total.toLocaleString()} บาท`;
+    `ລວມລາຍຈ່າຍເດືອນນີ້: ${total.toLocaleString()} ກີບ`;
 }
 
 function deleteExpense(id){
