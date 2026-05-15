@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ເພີ່ມລາຍຈ່າຍ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="top-bar">
+    <a href="index.html">⬅ ກັບ</a>
+  </div>
+
+  <div class="form-box">
+
+    <h2>➕ ເພີ່ມລາຍຈ່າຍ</h2>
+
+    <input
+      type="text"
+      id="title"
+      placeholder="ຊື່ລາຍການ"
+    >
+
+    <input
+      type="number"
+      id="amount"
+      placeholder="ຈຳນວນເງິນ"
+    >
+
+    <select id="category">
+
+      <option value="🍔 ອາຫານ">
+        🍔 ອາຫານ
+      </option>
+
+      <option value="⛽ ນ້ຳມັນ">
+        ⛽ ນ້ຳມັນ
+      </option>
+
+      <option value="🛒 ຊື້ເຄື່ອງ">
+        🛒 ຊື້ເຄື່ອງ
+      </option>
+
+      <option value="🚕 ເດີນທາງ">
+        🚕 ເດີນທາງ
+      </option>
+
+      <option value="🎮 ເກມ">
+        🎮 ເກມ
+      </option>
+
+      <option value="📦 ອື່ນໆ">
+        📦 ອື່ນໆ
+      </option>
+
+    </select>
+
+    <button onclick="addExpense()">
+      ບັນທຶກລາຍຈ່າຍ
+    </button>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

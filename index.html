@@ -1,70 +1,52 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="lo">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense Tracker</title>
-
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2563eb">
-  <link rel="stylesheet"href="/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js")
-}
-</script>
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>💰 ແອັບບັນທຶກລາຍຈ່າຍ </h1>
+  <div class="dashboard">
 
-    <div class="form-box">
+    <p class="small-title">ຍອດລາຍຈ່າຍເດືອນນີ້</p>
 
-      <input type="date" id="date">
+    <h1 id="monthlyTotal">0 ກີບ</h1>
 
-      <input type="text" id="title" placeholder="ຊື່ລາາຍການ">
+    <div class="dashboard-grid">
 
-      <select id="category">
-        <option value="ອາຫານ">ອາຫານ</option>
-        <option value="ເຕີມເກມ">ເຕີມເກມ</option>
-        <option value="ຊື້ເຄື່ອງ">ຊື້ເຄື່ອງ</option>
-        <option value="ເລກ">ເລກ</option>
-        <option value="ອື່ນໆ">ອື່ນໆ</option>
-      </select>
+      <div class="mini-card">
+        <span>📅</span>
+        <p id="todayDate"></p>
+      </div>
 
-      <input type="number" id="amount" placeholder="ຈໍານວນເງິນ">
-
-      <button onclick="addExpense()">ເພີ່ມລາຍການ</button>
-
-    </div>
-
-    <div class="summary-box">
-      <h2 id="monthlyTotal">ລວມເງິນເດືອນນີ້: 0 ກີບ</h2>
-    </div>
-    <div class="table-box">
-
-      <table>
-        <thead>
-          <tr>
-            <th>ວັນທີ</th>
-            <th>ລາຍການ</th>
-            <th>ໝວດໝູ່</th>
-            <th>ຈໍານວນເງິນ</th>
-            <th>ລົບ</th>
-          </tr>
-        </thead>
-
-        <tbody id="expenseList">
-
-        </tbody>
-
-      </table>
+      <div class="mini-card">
+        <span>💳</span>
+        <p id="expenseCount">0 ລາຍການ</p>
+      </div>
 
     </div>
 
   </div>
-  <script src="script.js"></script>
+
+  <div class="menu-grid">
+
+    <a href="add.html" class="menu-btn">
+      ➕ ເພີ່ມລາຍຈ່າຍ
+    </a>
+
+    <a href="history.html" class="menu-btn">
+      📜 ເບິ່ງລາຍການ
+    </a>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
