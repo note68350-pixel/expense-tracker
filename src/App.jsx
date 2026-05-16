@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword
 } from "firebase/auth";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc
+} from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDVb8nhkcfFuvvSp_ov7fkVmt2ihwqk19o",
   authDomain: "expense-tracker-eaba8.firebaseapp.com",
@@ -17,11 +26,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [text, setText] = useState("");
   const [amount, setAmount] = useState("");
+
+  useEffect(() => {
+  if (loggedIn) {
+    loadTransactions();
+  }
+}, [loggedIn]);
   const handleCreate = async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -42,23 +58,58 @@ function App() {
     await signInWithEmailAndPassword(auth, email, password);
 
     setLoggedIn(true);
+    loadTransactions();
   } catch (error) {
     alert(error.message);
   }
 };
-  const addTransaction = () => {
+  const addTransaction = async () => {
   if (!text || !amount) return;
 
-  const newTransaction = {
-    id: Date.now(),
-    text,
-    amount: Number(amount),
-  };
+  try {
+    const newTransaction = {
+      text,
+      amount: Number(amount),
+      date: new Date().toLocaleString(),
+    };
 
-  setTransactions([...transactions, newTransaction]);
+    await addDoc(
+      collection(db, "transactions"),
+      newTransaction
+    );
 
-  setText("");
-  setAmount("");
+    loadTransactions();
+
+    setText("");
+    setAmount("");
+
+  } catch (error) {
+    console.log(error);
+
+    alert(error.message);
+  }
+};
+  const loadTransactions = async () => {
+  const querySnapshot = await getDocs(
+    collection(db, "transactions")
+  );
+
+  const data = [];
+
+  querySnapshot.forEach((docItem) => {
+    data.push({
+      id: docItem.id,
+      ...docItem.data(),
+    });
+  });
+
+  setTransactions(data);
+};
+
+const deleteTransaction = async (id) => {
+  await deleteDoc(doc(db, "transactions", id));
+
+  loadTransactions();
 };
 
 const total = transactions.reduce(
@@ -270,47 +321,72 @@ const total = transactions.reduce(
   <h2>Recent Transactions</h2>
 
   {transactions.map((item) => (
+  <div
+    key={item.id}
+    style={{
+      background: "white",
+      padding: "18px",
+      borderRadius: "18px",
+      marginTop: "10px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+    }}
+  >
+    <div>
+      <h3 style={{ margin: 0 }}>
+        {item.text}
+      </h3>
+
+      <p
+        style={{
+          margin: 0,
+          color: "#64748b",
+          fontSize: "13px",
+        }}
+      >
+        📅 {item.date}
+      </p>
+    </div>
+
     <div
-      key={item.id}
       style={{
-        background: "white",
-        padding: "18px",
-        borderRadius: "18px",
-        marginTop: "10px",
         display: "flex",
-        justifyContent: "space-between",
         alignItems: "center",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+        gap: "10px",
       }}
     >
-      <div>
-        <h3 style={{ margin: 0 }}>
-          {item.text}
-        </h3>
-
-        <p
-          style={{
-            margin: 0,
-            color: "#64748b",
-            fontSize: "14px",
-          }}
-        >
-          Transaction
-        </p>
-      </div>
-
       <h3
         style={{
           color:
             item.amount > 0
               ? "#16a34a"
               : "#dc2626",
+          margin: 0,
         }}
       >
         {item.amount} ₭
       </h3>
+
+      <button
+        onClick={() =>
+          deleteTransaction(item.id)
+        }
+        style={{
+          background: "#ef4444",
+          border: "none",
+          color: "white",
+          borderRadius: "10px",
+          padding: "8px 12px",
+          cursor: "pointer",
+        }}
+      >
+        Delete
+      </button>
     </div>
-  ))}
+  </div>
+))}
 </div>
     )}
   </>
